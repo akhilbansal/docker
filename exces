@@ -1,0 +1,5 @@
+docker network  create --driver bridge rts
+docker run --network=rts -itd -p 2181:2181 --name=zk akhil1980/zk
+
+docker run --network=rts -itd -p 9092:9092 --name=kafka akhil1980/kafka2
+docker run --network=rts -it -p 9092:9092  --name=kafka akhil1980/kafka2
