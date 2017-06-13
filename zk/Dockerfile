@@ -6,4 +6,4 @@ RUN mv zookeeper/conf/zoo_sample.cfg zookeeper/conf/zoo.cfg
 EXPOSE 2181 2888 3888
 WORKDIR /zookeeper
 ENTRYPOINT ["/zookeeper/bin/zkServer.sh"]
-CMD ["start"]
+CMD ["start-foreground"]
