@@ -3,3 +3,21 @@ docker run --network=rts -itd -p 2181:2181 --name=zk akhil1980/zk
 
 docker run --network=rts -itd -p 9092:9092 --name=kafka akhil1980/kafka2
 docker run --network=rts -it -p 9092:9092  --name=kafka akhil1980/kafka2
+
+
+docker build -t akhil1980/zk zk/
+
+docker run -d --network=rts --name zk1 -v /home/akhil/docker/configs/zk1:/zookeeper/conf/ -v /home/akhil/docker/configs/zk1/dataDir:/dataDir -p 2181:2181 -p 2888:2888 -p 3888:3888 akhil1980/zk
+docker run -d --network=rts --name zk2 -v /home/akhil/docker/configs/zk2:/zookeeper/conf/ -v /home/akhil/docker/configs/zk2/dataDir:/dataDir -p 2182:2181 -p 2889:2888 -p 3889:3888 akhil1980/zk
+docker run -d --network=rts --name zk3 -v /home/akhil/docker/configs/zk3:/zookeeper/conf/ -v /home/akhil/docker/configs/zk3/dataDir:/dataDir -p 2183:2181 -p 2890:2888 -p 3890:3888 akhil1980/zk
+
+
+
+docker rm -f zk1
+docker rm -f zk2
+docker rm -f zk3
+
+docker exec -i -t zk1 /bin/bash
+
+
+dataDir
