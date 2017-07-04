@@ -1,0 +1,100 @@
+SVTA: 'e13c5c668684a25c', 
+sensorid: '3a4cbda1-d856-330f-809e-2af859c3135f', 
+variableid: 'Pit 36 Volume', 
+type: '', 
+activity: 'Drilling'
+
+
+
+Select * 
+from glimpse_coordinates
+where sensorid = de98d68b-72d9-3574-a5c6-91a460cad340
+and variableid = 'de98d68b-72d9-3574-a5c6-91a460cad340'
+and type = 'Realtime'
+and activity =  'Drilling';
+
+
+Select * 
+from glimpse_coordinates
+where sensorid = de98d68b-72d9-3574-a5c6-91a460cad340
+and variableid = 'de98d68b-72d9-3574-a5c6-91a460cad340'
+and type = 'Realtime'
+and activity =  'all';
+
+
+
+tail -F `ls rts* -tr | tail -2`  | grep -iE "(error|exception)"
+tail -F `ls rts-22* -tr | tail -2`  | grep -iE "(Received.*RtPublishBolt.*LOGMNEMONICRECENTVALUE|RtPublishBolt.*ConnectionId)"
+
+Push done by SignalRProxy
+
+tail -F `ls rts* -tr | tail -2`  | grep ".*MinMaxLogBolt.* WB: 622c0f83-8c17-3602-b333-92c87a58e454.*"
+
+tail -F `ls rts* -tr | tail -2`  | grep "Matching candidate"
+tail -F `ls rts* -tr | tail -2`  | grep "GCFound"
+tail -F `ls rts* -tr | tail -2`  | grep -E "(Guava|GCFound)"
+
+tail -F `ls rts* -tr | tail -2`  | grep -E "(ACK|Completed|persistence|Nanos)"
+tail -F `ls rts* -tr | tail -2`  | grep -E "(ALL LogMapper emits completed in|Valid rows:)"
+
+
+
+tail -F `ls rts* -tr | tail -4`  | grep "GrowingMarkerCache"
+
+
+tail -F rts-12-1493909631-worker-6701.log | grep --color "*MinMaxLogBolt*WB: ddbf2326-b6db-3347-8344-db4dd2c07c0d"
+tail -F rts-12-1493909631-worker-6701.log | grep "*MinMaxLogBolt*WB"
+
+
+tail -F `ls rts* -tr | tail -2`  | grep "GrowingMarkerCache"
+
+
+
+
+
+tail -F rts-3-1493306105-worker-6700.log  | grep "Matching candidate"
+
+tail -F rts-10-1493729817-worker-6700.log | grep "GCFound | Guava"
+
+
+
+
+tail -F rts-4-1493347120-worker-6700.log | grep "GCFound: [10-2028]"
+grep "GCFound: [200-9000]" rts-3-1493332111-worker*
+grep "Matching glimpse took"
+
+
+grep "Guava cache miss WB: ddbf2326-b6db-3347-8344-db4dd2c07c0d"  rts-3-1493332111-worker*
+grep "Guava cache miss WB" rts-3-1493332111-worker-6700*
+
+
+
+
+
+grep "Guava cache miss WB"  rts-3-1493332111-worker*
+grep "Matching glimpse took" 
+
+
+grep Matching glimpse
+tail -f rts-3-1493306105-worker-6700.log  | grep "Postrealtime case"
+tail -f rts-3-1493306105-worker-6700.log  | grep "min_max case"
+tail -f rts-2-1493324325* | grep "Matching candidate: [10-2048]"
+
+
+grep "entries after Guava" rts-2-1493324325*
+grep "will emit to AlarmBolt. size: [0-400]"
+
+host: np2rtos65*v AND objectKlass AND CommonRtsMapperBolt
+
+
+host: np2rtos65*v AND Async AND loop AND died
+host: np2rtos60*v AND Async AND loop AND died
+
+
+
+===========================================================================================================================================
+
+Growing Marker Bolt
+	new AND growing AND object
+	Total AND entries AND in AND IdsByWellbore AND cache
+	Exists AND in AND LogMinMaxMap
