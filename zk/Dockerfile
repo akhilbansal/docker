@@ -4,13 +4,15 @@ RUN tar -xzf zookeeper-3.4.10.tar.gz
 RUN mv zookeeper-3.4.10 zookeeper 
 #RUN mv zookeeper/conf/log4j.properties zookeeper/log4j.properties
 #RUN mv zookeeper/conf zookeeper/_conf 
-COPY log4j.properties /zookeeper/
+
 EXPOSE 2181 2888 3888
+VOLUME /logDir
 VOLUME /zookeeper/conf
 VOLUME /dataDir
 
-ENV ZOO_LOG_DIR=/zookeeper 
+
 ENV ZOO_LOG4J_PROP="INFO,ROLLINGFILE"
+ENV ZOO_LOG_DIR="/logDir" 
 ENV ZOOCFGDIR="/zookeeper/conf"
 WORKDIR /zookeeper
 

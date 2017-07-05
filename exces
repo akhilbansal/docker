@@ -5,27 +5,26 @@ docker run --network=rts -itd -p 9092:9092 --name=kafka akhil1980/kafka2
 docker run --network=rts -it -p 9092:9092  --name=kafka akhil1980/kafka2
 
 
-docker build -t akhil1980/zk zk/
-
-docker run -d --network=rts --name zk1 -v /home/akhil/docker/configs/:/zookeeper/conf/ -v /home/akhil/docker/configs/zk1/dataDir:/dataDir -p 2181:2181 -p 2888:2888 -p 3888:3888 akhil1980/zk
-docker run -d --network=rts --name zk2 -v /home/akhil/docker/configs/:/zookeeper/conf/ -v /home/akhil/docker/configs/zk2/dataDir:/dataDir -p 2182:2181 -p 2889:2888 -p 3889:3888 akhil1980/zk
-docker run -d --network=rts --name zk3 -v /home/akhil/docker/configs/:/zookeeper/conf/ -v /home/akhil/docker/configs/zk3/dataDir:/dataDir -p 2183:2181 -p 2890:2888 -p 3890:3888 akhil1980/zk
-
-
-
 docker rm -f zk1
 docker rm -f zk2
 docker rm -f zk3
 
+
+docker build -t akhil1980/zk zk/
+
+
+docker run -d --network=rts --name zk1 -v /home/akhil/docker/configs/:/zookeeper/conf/ -v /home/akhil/docker/configs/zk1/dataDir:/dataDir -v /home/akhil/docker/configs/logs/zk1:/logDir/ -p 2181:2181 -p 2888:2888 -p 3888:3888 akhil1980/zk
+
+docker run -d --network=rts --name zk2 -v /home/akhil/docker/configs/:/zookeeper/conf/ -v /home/akhil/docker/configs/zk2/dataDir:/dataDir -v /home/akhil/docker/configs/logs/zk2:/logDir/ -p 2182:2181 -p 2889:2888 -p 3889:3888 akhil1980/zk
+
+docker run -d --network=rts --name zk3 -v /home/akhil/docker/configs/:/zookeeper/conf/ -v /home/akhil/docker/configs/zk3/dataDir:/dataDir -v /home/akhil/docker/configs/logs/zk3:/logDir/ -p 2183:2181 -p 2890:2888 -p 3890:3888 akhil1980/zk
+
+
 docker exec -i -t zk1 /bin/bash
-
-
-dataDir
 
 
 
 java -cp zookeeper-3.4.10.jar:lib/log4j-1.2.16.jar:lib/slf4j-log4j12-1.6.1.jar:lib/slf4j-api-1.6.1.jar:conf org.apache.zookeeper.server.quorum.QuorumPeerMain /home/akhil/Downloads/zookeeper-3.4.10/conf/zoo.cfg
-
 
 
 java -cp zookeeper-3.4.10.jar:lib/log4j-1.2.16.jar:lib/slf4j-log4j12-1.6.1.jar:lib/slf4j-api-1.6.1.jar:conf org.apache.zookeeper.server.quorum.QuorumPeerMain conf/zoo.cfg
@@ -35,8 +34,6 @@ java -cp zookeeper-3.4.10.jar:lib/log4j-1.2.16.jar:lib/slf4j-log4j12-1.6.1.jar:l
 java -cp zookeeper-3.4.9.jar:lib/log4j-1.2.16.jar:lib/slf4j-log4j12-1.6.1.jar:lib/slf4j-api-1.6.1.jar:conf \
   org.apache.zookeeper.server.quorum.QuorumPeerMain \
   conf/zoo.cfg
-
-
 
 
 ZOOCFGDIR="/zookeeper/conf"
