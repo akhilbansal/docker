@@ -6,10 +6,7 @@ RUN mv zookeeper-3.4.10 zookeeper
 #RUN mv zookeeper/conf zookeeper/_conf 
 
 EXPOSE 2181 2888 3888
-VOLUME /logDir
-VOLUME /zookeeper/conf
-VOLUME /dataDir
-
+VOLUME ["/logDir","/zookeeper/conf","/dataDir"]
 
 ENV ZOO_LOG4J_PROP="INFO,ROLLINGFILE"
 ENV ZOO_LOG_DIR="/logDir" 
