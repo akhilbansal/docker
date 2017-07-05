@@ -8,6 +8,13 @@ COPY log4j.properties /zookeeper/
 EXPOSE 2181 2888 3888
 VOLUME /zookeeper/conf
 VOLUME /dataDir
+
+ENV ZOO_LOG_DIR=/zookeeper 
+ENV ZOO_LOG4J_PROP="INFO,ROLLINGFILE"
+ENV ZOOCFGDIR="/zookeeper/conf"
 WORKDIR /zookeeper
-ENTRYPOINT ["bin/zkServer.sh"]
-CMD ["start-foreground"]
+
+#ENTRYPOINT ["bin/zkServer.sh"]
+#CMD ["start-foreground"]
+CMD ["java","-cp","zookeeper-3.4.10.jar:lib/log4j-1.2.16.jar:lib/slf4j-log4j12-1.6.1.jar:lib/slf4j-api-1.6.1.jar:conf","org.apache.zookeeper.server.quorum.QuorumPeerMain","/zookeeper/conf/zoo.cfg"]
+
