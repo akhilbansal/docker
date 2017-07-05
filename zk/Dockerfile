@@ -1,7 +1,9 @@
 from akhil1980/jre:8
 
-RUN wget http://apache.mirrors.tds.net/zookeeper/stable/zookeeper-3.4.10.tar.gz
+#RUN wget http://apache.cs.utah.edu/zookeeper/zookeeper-3.4.10/zookeeper-3.4.10.tar.gz 
+COPY zookeeper-3.4.10.tar.gz / 
 RUN tar -xzf zookeeper-3.4.10.tar.gz 
+RUN rm zookeeper-3.4.10.tar.gz 
 RUN mv zookeeper-3.4.10 zookeeper 
 
 EXPOSE 2181 2888 3888
