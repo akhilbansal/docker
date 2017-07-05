@@ -1,0 +1,9 @@
+configs/logs/*
+!configs/zk1/dataDir/myid
+
+
+
+# Log file
+*.log
+
+
