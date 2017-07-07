@@ -42,6 +42,37 @@ services:
             - /home/akhil/fs/config/:/zookeeper/conf/
             - /home/akhil/fs/dataDir/zk3:/dataDir 
             - /home/akhil/fs/logDir/zk3:/logDir/
+    k1:
+       image: akhil1980/kafka
+       container_name: k1
+       networks:
+           - rts1
+       ports:
+           - 9092:9092
+       volumes:
+           - /home/akhil/fs/kafka/k1:/config
+           - /home/akhil/fs/kafka/k1/logDir:/logDir
+    k2:
+       image: akhil1980/kafka
+       container_name: k2
+       networks:
+           - rts1
+       ports:
+           - 9093:9092
+       volumes:
+           - /home/akhil/fs/kafka/k2:/config
+           - /home/akhil/fs/kafka/k2/logDir:/logDir
+    k3:
+       image: akhil1980/kafka
+       container_name: k3
+       networks:
+           - rts1
+       ports:
+           - 9094:9092
+       volumes:
+           - /home/akhil/fs/kafka/k3:/config
+           - /home/akhil/fs/kafka/k3/logDir:/logDir
+
 networks:
     rts1:
          driver: bridge

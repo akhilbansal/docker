@@ -18,19 +18,31 @@ docker run -d --network=rts --name zk3 -v /home/akhil/fs/config/:/zookeeper/conf
 
 docker exec -i -t zk1 /bin/bash
 
-
-
-
-
 java -cp zookeeper-3.4.10.jar:lib/log4j-1.2.16.jar:lib/slf4j-log4j12-1.6.1.jar:lib/slf4j-api-1.6.1.jar:conf org.apache.zookeeper.server.quorum.QuorumPeerMain conf/zoo.cfg
-
-
-
-
 
 
 docker run -d --network=rts --name zk1 -v C:\docker\config\:/zookeeper/conf/ -v C:\docker\dataDir\zk1:/dataDir -v C:\docker\logFle\zk1:/logDir/ -p 2181:2181 -p 2888:2888 -p 3888:3888 akhil1980/zk
 docker run -d --network=rts --name zk2 -v C:\docker\config\:/zookeeper/conf/ -v C:\docker\dataDir\zk2:/dataDir -v C:\docker\logFle\zk2:/logDir/ -p 2182:2181 -p 2889:2888 -p 3889:3888 akhil1980/zk
 docker run -d --network=rts --name zk3 -v C:\docker\config\:/zookeeper/conf/ -v C:\docker\dataDir\zk3:/dataDir -v C:\docker\logFle\zk3:/logDir/ -p 2183:2181 -p 2890:2888 -p 3890:3888 akhil1980/zk
 
+
+docker rm -f kk
+docker build -t akhil1980/kafka kafka/
+
+docker run -it --network=docker_rts1 --name k1  -v /home/akhil/fs/kafka/k1:/config -v /home/akhil/fs/kafka/k1/logDir:/logDir -p 9092:9092 akhil1980/kafka 
+docker run -it --network=docker_rts1 --name k1  -v /home/akhil/fs/kafka/k2:/config -v /home/akhil/fs/kafka/k2/logDir:/logDir -p 9093:9092 akhil1980/kafka 
+
+
+sh kafka-topics.sh --zookeeper 172.19.0.6:2181 --create --replication-factor 1 --partition 2 --topic test
+sh kafka-topics.sh --zookeeper 172.19.0.6:2181 --create --replication-factor 3 --partition 3 --topic test1
+
+
+sh kafka-topics.sh --zookeeper 172.19.0.6:2181 --list
+sh kafka-topics.sh --zookeeper 172.19.0.6:2181 --describe --topic test1
+
+sh kafka-console-consumer.sh --zookeeper 172.19.0.6:2181 --topic test1 --from-beginning
+
+
+sh kafka-console-producer.sh --broker-list k1:9092 --topic test1
+sh kafka-console-consumer.sh --zookeeper zk1:2181 --topic test1
 

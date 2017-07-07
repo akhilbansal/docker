@@ -5,6 +5,7 @@ RUN tar -xzf kafka_2.10-0.8.2.2.tgz
 RUN mv kafka_2.10-0.8.2.2 kafka
 EXPOSE 9092
 WORKDIR /kafka
-RUN sed -i -- 's/localhost/zk/g' config/server.properties
+VOLUME ["/config","/logDir"]
+#RUN sed -i -- 's/localhost/zk/g' config/server.properties
 ENTRYPOINT ["bin/kafka-server-start.sh"]
-CMD ["config/server.properties"]
+CMD ["/config/kafka.properties"]
