@@ -1,38 +1,49 @@
-version: "3.2"
+version: "3.3"
 services:
     zk1:
         image: akhil1980/zk
         restart: always
         container_name: zk1
+        networks:
+            - rts1
         ports:
             - 2181:2181
             - 2888:2888
             - 3888:3888
         volumes:
-            - /home/akhil/docker/configs/:/zookeeper/conf/
-            - /home/akhil/docker/configs/zk1/dataDir:/dataDir
-            - /home/akhil/docker/configs/logs/zk1:/logDir/
+            - /home/akhil/fs/config/:/zookeeper/conf/
+            - /home/akhil/fs/dataDir/zk1:/dataDir
+            - /home/akhil/fs/logDir/zk1:/logDir/
     zk2:
         image: akhil1980/zk
         restart: always
         container_name: zk2
+        networks:
+            - rts1
         ports:
             - 2182:2181
             - 2889:2888
             - 3889:3888
         volumes:
-            - /home/akhil/docker/configs/:/zookeeper/conf/
-            - /home/akhil/docker/configs/zk2/dataDir:/dataDir
-            - /home/akhil/docker/configs/logs/zk2:/logDir/
+            - /home/akhil/fs/config/:/zookeeper/conf/
+            - /home/akhil/fs/dataDir/zk2:/dataDir
+            - /home/akhil/fs/logDir/zk2:/logDir/
     zk3:
         image: akhil1980/zk
         restart: always
         container_name: zk3
+        networks:
+            - rts1
         ports:
             - 2183:2181
             - 2890:2888
             - 3890:3888
         volumes:
-            - /home/akhil/docker/configs/:/zookeeper/conf/
-            - /home/akhil/docker/configs/zk3/dataDir:/dataDir 
-            - /home/akhil/docker/configs/logs/zk3:/logDir/
+            - /home/akhil/fs/config/:/zookeeper/conf/
+            - /home/akhil/fs/dataDir/zk3:/dataDir 
+            - /home/akhil/fs/logDir/zk3:/logDir/
+networks:
+    rts1:
+         driver: bridge
+         internal: true
+
